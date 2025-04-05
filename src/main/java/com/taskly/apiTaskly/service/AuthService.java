@@ -1,6 +1,6 @@
 package com.taskly.apiTaskly.service;
 
-import com.taskly.apiTaskly.exception.UserAlreadyExists;
+import com.taskly.apiTaskly.exception.InvalidRequestException;
 import com.taskly.apiTaskly.model.User;
 import com.taskly.apiTaskly.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,12 +17,12 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public User register(User user) {
+    public void register(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new UserAlreadyExists("User Already Exists!");
+            throw new InvalidRequestException("Username already taken!");
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 }

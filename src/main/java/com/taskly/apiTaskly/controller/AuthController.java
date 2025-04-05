@@ -4,10 +4,7 @@ import com.taskly.apiTaskly.model.User;
 import com.taskly.apiTaskly.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -20,8 +17,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        User registeredUser = authService.register(user);
-        return new ResponseEntity<>(registeredUser, HttpStatus.OK);
+    public ResponseEntity<String> register(@RequestBody User user) {
+        authService.register(user);
+        return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public String demo() {
+        return "login response";
     }
 }
