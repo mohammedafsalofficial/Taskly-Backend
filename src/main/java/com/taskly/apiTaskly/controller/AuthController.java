@@ -1,5 +1,7 @@
 package com.taskly.apiTaskly.controller;
 
+import com.taskly.apiTaskly.dto.LoginRequest;
+import com.taskly.apiTaskly.dto.LoginResponse;
 import com.taskly.apiTaskly.model.User;
 import com.taskly.apiTaskly.service.AuthService;
 import org.springframework.http.HttpStatus;
@@ -23,7 +25,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String demo() {
-        return "login response";
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+        LoginResponse response = authService.verifyUser(loginRequest);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
