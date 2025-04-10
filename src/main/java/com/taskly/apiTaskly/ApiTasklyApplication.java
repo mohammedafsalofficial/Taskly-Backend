@@ -9,5 +9,4 @@ public class ApiTasklyApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ApiTasklyApplication.class, args);
 	}
-
 }
