@@ -24,14 +24,4 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleInvalidCredentials(BadCredentialsException e) {
         return new ResponseEntity<>("Invalid Username or Password.", HttpStatus.UNAUTHORIZED);
     }
-
-    @ExceptionHandler(JwtTokenExpiredException.class)
-    public ResponseEntity<String> handleTokenExpired(JwtTokenExpiredException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
-    }
-
-    @ExceptionHandler(JwtTokenException.class)
-    public ResponseEntity<String> handleTokenError(JwtTokenException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-    }
 }
